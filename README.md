@@ -83,7 +83,7 @@ Here is an example of how to fill it (**remember about changing `yourmodid`**):
 ```
 More info here: https://github.com/SpongePowered/Mixin
 
-## How to launch in dev-worspace
+## How to launch in dev-workspace
 
 Add following Program Agruments:<br> `--tweakClass org.spongepowered.asm.launch.MixinTweaker --mixin mixins.yourmodid.json`<br> and replace `yourmodid` as mentioned above.
 
