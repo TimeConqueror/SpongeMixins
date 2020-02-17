@@ -83,10 +83,10 @@ Here is an example of how to fill it (**remember about changing `yourmodid`**):
 ```
 More info here: https://github.com/SpongePowered/Mixin
 
-##How to launch in dev-worspace
+## How to launch in dev-worspace
 
-Add following Program Agruments: `--tweakClass org.spongepowered.asm.launch.MixinTweaker --mixin mixins.yourmodid.json` and replace `yourmodid` as mentioned above.
+Add following Program Agruments:<br> `--tweakClass org.spongepowered.asm.launch.MixinTweaker --mixin mixins.yourmodid.json`<br> and replace `yourmodid` as mentioned above.
 
-##FAQ
+## FAQ
 1. Q: `project\build\tmp\reobf\mixins.srg (Can't find given file)` while build<br>
 A: Your should run minecraft after you created or added new mixins to generate this file
