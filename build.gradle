@@ -55,6 +55,14 @@ dependencies {
     }
 }
 
+jar {
+    manifest {
+        attributes([
+                'FMLCorePlugin': 'ru.timeconqueror.spongemixins.core.MixinLoadingPlugin'
+        ])
+    }
+}
+
 tasks.jar.finalizedBy(shadowJar)
 
 shadowJar {
