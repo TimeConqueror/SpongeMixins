@@ -89,3 +89,19 @@ processResources {
         exclude 'mcmod.info'
     }
 }
+
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+
+    configurations.shade.each { dep ->
+        from(project.zipTree(dep)){
+            exclude "META-INF/*.RSA", "META-INF/*.SF", "META-INF/*.MF"
+        }
+    }
+
+    classifier = 'dev'
+}
+
+artifacts {
+    archives deobfJar
+}
