@@ -14,6 +14,9 @@ buildscript {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
     }
 }
+plugins {
+    id "com.github.johnrengelman.shadow" version "1.2.3"
+}
 apply plugin: 'forge'
 
 version = "1.0.0"
@@ -31,7 +34,6 @@ targetCompatibility = JavaVersion.VERSION_1_8
 minecraft {
     version = "1.7.10-10.13.4.1614-1.7.10"
     runDir = "eclipse"
-    srgExtra "PK: org shaded/org"
 }
 
 repositories {
@@ -53,12 +55,12 @@ dependencies {
     }
 }
 
-jar {
-    configurations.shade.each { dep ->
-        from(project.zipTree(dep)) {
-            exclude 'META-INF', 'META-INF/**'
-        }
-    }
+tasks.jar.finalizedBy(shadowJar)
+
+shadowJar {
+    classifier = ""
+    configurations = [project.configurations.shade]
+    relocate "org.spongepowered", "shaded.org.spongepowered"
 }
 
 processResources {
