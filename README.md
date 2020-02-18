@@ -2,7 +2,8 @@
 Mod that allows you to use mixins in 1.7.10
 
 ## How to setup library in dev workspace:
-1. Put `SpongeMixins-dev.jar` in the %project%/libs folder and refresh gradle.
+1. Put `SpongeMixins-dev.jar` in the %project%/libs folder and refresh gradle.<br><br>
+1.1. Add this string to the dependencies in your main class of mod: `required-after:spongemixins;`.<br><br>
 2. Add to your `build.gradle` this stuff:<p>
 2.1. Add Shadow Plugin to convert all your future `org.spongepowered.*` imports to `shaded.org.spongepowered.*`
 
@@ -12,7 +13,40 @@ plugins {
 }
 ```
 
-&emsp;&emsp;2.2 Copy this script to the end of your `build.gradle` and **replace** all `yourmodid` here with the modid that you use in `mixins.modid.json` file.
+&emsp;&emsp;2.2 Add SpongeMixins library in dependencies with providing maven in repositories:
+```groovy
+repositories {
+    maven {
+        name = "sponge"
+        url = "http://repo.spongepowered.org/maven/"
+    }
+}
+
+dependencies {
+    compile('org.spongepowered:mixin:0.7.11-SNAPSHOT') {
+        // Mixin includes a lot of dependencies that are too up-to-date
+        exclude module: 'launchwrapper'
+        exclude module: 'guava'
+        exclude module: 'gson'
+        exclude module: 'commons-io'
+        exclude module: 'log4j-core'
+    }
+}
+```
+&emsp;&emsp;2.3 Add this lines to your manifest attributes. and **replace** all `yourmodid` here with the modid that you use in `mixins.modid.json` file.
+```groovy
+jar {
+    manifest {
+        attributes([
+                "TweakClass": "shaded.org.spongepowered.asm.launch.MixinTweaker",
+                'FMLCorePluginContainsFMLMod': 'true',
+                "ForceLoadAsMod": true,
+                'MixinConfigs': 'mixins.yourmodid.json'
+        ])
+    }
+}
+```
+&emsp;&emsp;2.4 Copy this script to the end of your `build.gradle`. Here you should **replace** all `yourmodid` here with your mod id too.
 This script is needed to: 
 * Relocate all your `org.spongepowered.*` imports to `shaded.org.spongepowered.*`
 * Obfuscate minecraft methods, that are used in Mixin classes
@@ -44,19 +78,6 @@ sourceSets {
     main {
         output.resourcesDir = output.classesDir
         ext.refMap = "mixins.yourmodid.refmap.json"
-    }
-}
-```
-
-&emsp;&emsp;2.3 Add this lines to your manifest attributes. Here you should **replace** all `yourmodid` here with your mod id too.
-```groovy
-jar {
-    manifest {
-        attributes([
-                "TweakClass"                 : "shaded.org.spongepowered.asm.launch.MixinTweaker",
-                "MixinConfigs"               : "mixins.yourmodid.json",
-                "FMLCorePluginContainsFMLMod": "true",
-        ])
     }
 }
 ```
