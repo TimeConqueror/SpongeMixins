@@ -3,8 +3,8 @@ Mod that allows you to use mixins in 1.7.10
 
 ## How to setup library in dev workspace:
 1. Put `SpongeMixins-dev.jar` in the %project%/libs folder and refresh gradle.<br><br>
-1.1. Add this string to the dependencies in your main class of mod: `required-after:spongemixins;`.<br><br>
-2. Add to your `build.gradle` this stuff:<p>
+1.1. Add this string to the dependencies in your main class of mod: `required-after:spongemixins;`<br><br>
+2. Add this stuff to your `build.gradle`:<p>
 2.1. Add Shadow Plugin to convert all your future `org.spongepowered.*` imports to `shaded.org.spongepowered.*`
 
 ```groovy
@@ -13,7 +13,7 @@ plugins {
 }
 ```
 
-&emsp;&emsp;2.2 Add SpongeMixins library in dependencies with providing maven in repositories:
+&emsp;&emsp;2.2 Add SpongeMixins library to dependencies and provide maven in repositories:
 ```groovy
 repositories {
     maven {
@@ -33,7 +33,7 @@ dependencies {
     }
 }
 ```
-&emsp;&emsp;2.3 Add this lines to your manifest attributes. and **replace** all `yourmodid` here with the modid that you use in `mixins.modid.json` file.
+&emsp;&emsp;2.3 Add these lines to your manifest attributes and **replace** all `yourmodid` here with the modid that you use in `mixins.modid.json` file.
 ```groovy
 jar {
     manifest {
@@ -46,11 +46,11 @@ jar {
     }
 }
 ```
-&emsp;&emsp;2.4 Copy this script to the end of your `build.gradle`. Here you should **replace** all `yourmodid` here with your mod id too.
+&emsp;&emsp;2.4 Copy this script to the end of your `build.gradle`. Here you should **replace** all `yourmodid` with your mod id too.
 This script is needed to: 
 * Relocate all your `org.spongepowered.*` imports to `shaded.org.spongepowered.*`
 * Obfuscate minecraft methods, that are used in Mixin classes
-* Add refmap file, that is used by SpongeMixins in runtime
+* Add refmap file that is used by SpongeMixins in runtime
 
 
 ```groovy
