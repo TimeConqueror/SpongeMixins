@@ -58,7 +58,10 @@ dependencies {
 jar {
     manifest {
         attributes([
-                'FMLCorePlugin': 'ru.timeconqueror.spongemixins.core.MixinLoadingPlugin'
+                'FMLCorePluginContainsFMLMod': 'true',
+                "TweakClass"                 : "shaded.org.spongepowered.asm.launch.MixinTweaker",
+                "TweakOrder"                 : -2147483648,
+                "ForceLoadAsMod"             : true
         ])
     }
 }
@@ -92,12 +95,6 @@ processResources {
 
 task deobfJar(type: Jar) {
     from sourceSets.main.output
-
-    configurations.shade.each { dep ->
-        from(project.zipTree(dep)){
-            exclude "META-INF/*.RSA", "META-INF/*.SF", "META-INF/*.MF"
-        }
-    }
 
     classifier = 'dev'
 }
