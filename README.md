@@ -110,4 +110,4 @@ Add following Program Agruments:<br> `--tweakClass org.spongepowered.asm.launch.
 
 ## FAQ
 1. Q: `project\build\tmp\reobf\mixins.srg (Can't find given file)` while build<br>
-A: Your should run minecraft after you created or added new mixins to generate this file
+A: You should run minecraft after you created or added new mixins to generate this file
