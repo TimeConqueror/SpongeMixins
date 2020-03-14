@@ -20,7 +20,9 @@ def yourMixinConfig = 'mixins.yourmodid.json'
 */
 def refMapForYourConfig = 'mixins.yourmodid.refmap.json'
 /**
-* Relative path to the new annotation processor. You should download it from //TODO fix// and then add to the project folder. You may also place it in the folder, and add this folder to the path.
+* Relative path to the new annotation processor. 
+* You should download it (https://github.com/TimeConqueror/SpongeMixins/raw/master/mixin-0.8-SNAPSHOT.jar) and then place to the project folder. 
+* You may also place it in the inner folders, only thing you should to do is to provide right RELATIVE path.
 */
 def relativePathToMixinAP = 'mixin-0.8-SNAPSHOT.jar'
 
