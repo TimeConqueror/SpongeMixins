@@ -14,12 +14,9 @@ buildscript {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
     }
 }
-plugins {
-    id "com.github.johnrengelman.shadow" version "1.2.3"
-}
 apply plugin: 'forge'
 
-version = "1.0.0"
+version = "1.1.0"
 group = "ru.timeconqueror" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "SpongeMixins"
 
@@ -59,20 +56,26 @@ jar {
     manifest {
         attributes([
                 'FMLCorePluginContainsFMLMod': 'true',
-                "TweakClass"                 : "shaded.org.spongepowered.asm.launch.MixinTweaker",
+                "TweakClass"                 : "org.spongepowered.asm.launch.MixinTweaker",
                 "TweakOrder"                 : -2147483648,
                 "ForceLoadAsMod"             : true
         ])
     }
+
+    configurations.shade.copyRecursive().setTransitive(false).each { artifact ->
+        from (zipTree(artifact)) {
+            exclude "META-INF/*.RSA", "META-INF/*.SF", "META-INF/*.MF"
+        }
+    }
 }
 
-tasks.jar.finalizedBy(shadowJar)
-
-shadowJar {
-    classifier = ""
-    configurations = [project.configurations.shade]
-    relocate "org.spongepowered", "shaded.org.spongepowered"
-}
+//tasks.jar.finalizedBy(shadowJar)
+//
+//shadowJar {
+//    classifier = ""
+//    configurations = [project.configurations.shade]
+//    relocate "org.spongepowered", "shaded.org.spongepowered"
+//}
 
 processResources {
     // this will ensure that this task is redone when the versions change.
