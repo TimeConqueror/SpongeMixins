@@ -3,3 +3,7 @@
 /out/
 .idea
 eclipse
+*.bat
+Spongemixin.iml
+Spongemixin.ipr
+Spongemixin.iws
