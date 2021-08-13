@@ -28,8 +28,8 @@ def relativePathToMixinAP = 'mixin-0.8-SNAPSHOT.jar'
 
 repositories {
     maven {
-        name = "sponge"
-        url = "http://repo.spongepowered.org/maven/"
+        name = 'sponge'
+        url = 'https://repo.spongepowered.org/repository/maven-public'
     }
 }
 
