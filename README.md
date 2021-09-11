@@ -88,7 +88,6 @@ afterEvaluate {
 
 sourceSets {
     main {
-        output.resourcesDir = output.classesDir
         ext.refMap = refMapForYourConfig
     }
 }
